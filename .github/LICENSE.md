@@ -1,4 +1,4 @@
-# MIT License
+MIT License
 
 Copyright &copy; 2018 [World Wide Web Consortium](https://www.w3.org/)
 
