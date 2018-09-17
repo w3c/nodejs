@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>W3C &mdash; Node.js best practices and recommended tools</title>
+        <link rel="stylesheet" href="https://www.w3.org/People/Antonio/noto/noto-tmp.css" />
+        <style>
+            :not(pre):not(ol):not(ul) {
+                line-height: 1.5;
+            }
+            pre, pre *, ol, ol *, ul, ul * {
+                line-height: 1.25;
+            }
+            :not(code):not(pre) {
+                font-family: 'Noto Sans', sans-serif;
+            }
+            code, code *, pre, pre * {
+                font-family:  'Inconsolata', monospace !important;
+            }
+            body {
+                box-sizing: border-box;
+                margin: 0 auto;
+                padding: 1rem;
+                width: 100%;
+                max-width: 60rem;
+            }
+            header p img {
+                transform: scale(.8);
+                transition: transform .2s ease-out;
+            }
+            header p img:hover,
+            header p img:focus,
+            header p img:active {
+                transform: none;
+            }
+            nav {
+                float: right;
+                padding: .5rem 1rem;
+                background-color: #f0f0f0;
+            }
+            nav ul {
+                padding-left: 0;
+                list-style-type: none;
+            }
+            main {
+                clear: both;
+            }
+            header,
+            footer {
+                border-style: solid;
+                border-color: #f0f0f0;
+            }
+            header {
+                padding-botton: 1rem;
+                border-width: 0 0 .2rem 0;
+            }
+            footer {
+                padding-top: 1rem;
+                border-width: .2rem 0 0 0;
+            }
+            h2 a,
+            h3 a,
+            h4 a,
+            h5 a,
+            h6 a {
+                opacity: 0;
+                margin-left: 1rem;
+                text-decoration: none;
+                font-weight: 300;
+                transition: .25s opacity linear;
+            }
+
+            section:hover h2 a,
+            section:hover h3 a,
+            section:hover h4 a,
+            section:hover h5 a,
+            section:hover h6 a {
+                opacity: 1;
+            }
+
+            :target {
+                animation-duration: 2s;
+                animation-name: highlight;
+            }
+
+            @keyframes highlight {
+                0%, 50% {
+                    box-shadow: 0 0 4rem #000000;
+                    background-color: #ffffff;
+                }
+                to {}
+            }
+            .pending {
+                background-color: #ffe0e0;
+                padding: 0 .25em;
+            }
+            a[href^='https://www.npmjs.com/package/']::before {
+                content: "📦 ";
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <h1>W3C &mdash; Node.js best practices and recommended tools</h1>
+            <nav>
+                <h2>Contents</h2>
+                <ul>
+                    <li><a href="#npm">Package manager</a></li>
+                    <li><a href="#conventions">Code conventions</a></li>
+                    <li><a href="#security">Security</a></li>
+                    <li><a href="#lint">Linting and hinting</a></li>
+                    <li><a href="#coverage">Code coverage</a></li>
+                    <li><a href="#dep-mgmt">Dependency management</a></li>
+                    <li><a href="#testing">Testing</a></li>
+                    <li><a href="#tools">Transpilers and module bundlers</a></li>
+                    <li><a href="#frontend">Front-end frameworks</a></li>
+                    <li><a href="#docs">Documentation</a></li>
+                    <li><a href="#packages">Other recommended packages</a></li>
+                    <li><a href="#also">Additional notes and links</a></li>
+                </ul>
+            </nav>
+            <p>
+                <a href="https://www.w3.org/"><img src="img/w3c-logo.png" alt="W3C logo" title="Go to W3C's web site" /></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://nodejs.org/en/"><img src="img/nodejs-logo.png" alt="Node.js logo" title="Go to Node.js web site" /></a>
+            </p>
+            <p>Starting a new Node.js project? Check out the <a href="https://github.com/w3c/nodejs/tree/master/template/">template project</a>.</p>
+            <p>Contribute to this guide <a href="https://github.com/w3c/nodejs">on GitHub</a>.</p>
+        </header>
+
+        <main>
+
+            <section id="npm">
+                <h2>Package manager <a href="#npm">&#x1F517;</a></h2>
+                <p>We use <a href="https://www.npmjs.com/">npm</a>.
+                    Some of us have evaluated <a href="https://yarnpkg.com/lang/en/">Yarn</a>, but we are not convinced it's a better alternative at the
+                    moment.</p>
+            </section>
+
+            <section id="conventions">
+                <h2>Code conventions <a href="#conventions">&#x1F517;</a></h2>
+                <p>Refer to
+                    <a href="https://w3c.github.io/design/templates/technical-decisions.html#4-js">&ldquo;technical decisions&rdquo; in the Design repository,
+                        &sect; 4 &ldquo;JS&rdquo;</a>. This is a work-in-progress based on personal experience and team feedback.</p>
+            </section>
+
+            <section id="security">
+                <h2>Security <a href="#security">&#x1F517;</a></h2>
+                <p>We use <code>npm audit</code> to watch vulnerabilities in packages.
+				    <strong>Caveat:</strong> it requires <code>npm&gt;=6</code>, and Node.js <code>8</code> uses <code>npm@5</code> by default.
+				    </p>
+                <p>See eg <a href="https://github.com/w3c/echidna/blob/master/package.json#L80">how we use it in Echidna</a>.
+                    We have devised a mechanism to keep track of known vulnerabilities (exceptions); see the file
+                    <a href="https://github.com/w3c/echidna/blob/master/known-vulns.txt"><code>known-vulns.txt</code></a>.</p>
+                <p>Until <code>npm audit</code> is capable of alerting of outdated packages too, sometimes we use
+                    <a href="https://www.npmjs.com/package/npm-check"><code>npm-check</code></a> in our scripts to check if there are outdated versions of packages.</p>
+                <p>We are phasing out <a href="https://www.npmjs.com/package/nsp"><code>nsp</code></a> for this
+				    (except possibly when we are forced to use Node.js <code>&lt;=8</code>; see caveat above).</p>
+            </section>
+
+            <section id="lint">
+                <h2>Linting and hinting <a href="#lint">&#x1F517;</a></h2>
+                <p>We <em>lint</em> our code using <a href="https://www.npmjs.com/package/eslint"><code>eslint</code></a>: see
+                    <a href="https://github.com/w3c/echidna/blob/master/package.json#L81">an example of
+                    usage in Echidna</a>, and <a href="https://github.com/w3c/echidna/blob/master/.eslintrc.json">the config file we maintain</a>.</p>
+                <p>The package <a href="https://www.npmjs.com/package/eslint-plugin-node"><code>eslint-plugin-node</code></a> is also used, to provide a
+                    baseline of common rules (which we modify slightly via config).</p>
+                <p>We <em>hint</em> our code using <a href="https://www.npmjs.com/package/jshint"><code>jshint</code></a>: see
+                  <a href="https://github.com/w3c/Eunomia/blob/master/package.json#L45">an example of
+                    usage in Eunomia</a>, and <a href="https://github.com/w3c/Eunomia/blob/master/.jshintrc">the config file we maintain</a>.</p>
+            </section>
+
+            <section id="coverage">
+                <h2>Code coverage <a href="#coverage">&#x1F517;</a></h2>
+                <p>We use packages <a href="https://www.npmjs.com/package/istanbul"><code>istanbul</code></a> and
+                    <a href="https://www.npmjs.com/package/coveralls"><code>coveralls</code></a> to measure code coverage.</p>
+                <p>See eg <a href="https://github.com/w3c/echidna/blob/master/package.json#L87">how we use it in Echidna</a>, and
+                    <a href="https://github.com/w3c/echidna/blob/master/.istanbul.yml">the config file we maintain</a>.</p>
+                <p>The (free) service Coveralls produces <a href="https://coveralls.io/github/w3c/echidna">nice reports of code coverage and changes in
+                    it</a>.</p>
+            </section>
+
+            <section id="dep-mgmt">
+                <h2>Dependency management <a href="#dep-mgmt">&#x1F517;</a></h2>
+                <p>The (free) service <a href="https://greenkeeper.io/">Greenkeeper</a> watches all <code>npm</code> packages that our application uses, and
+                    submits handy PRs every time there are updates.
+                    Set it up in <strong>the organisation</strong> configuration pages,
+                    <a href="https://github.com/organizations/w3c/settings/installations">under <em>Installed GitHub apps</em></a>
+                    <strong>(it should be given access strictly to the Node.js projects that need it)</strong>.</p>
+            </section>
+
+            <section id="testing">
+                <h2>Testing <a href="#testing">&#x1F517;</a></h2>
+                <p>We use <a href="https://www.npmjs.com/package/mocha"><code>mocha</code></a>.
+                    Except for smaller test suites or in simpler projects, we usually pair it with the assertion library
+                    <a href="https://www.npmjs.com/package/chai"><code>chai</code></a>.</p>
+                <p><a href="https://github.com/w3c/Eunomia/blob/master/test/mocha.opts">Suggested config file</a> (typically under <code>test/</code>).</p>
+                <p>For testing <em>on the browser</em>,
+                    <a href="https://github.com/web-platform-tests/wpt/tree/master/resources"><code>testharness.js</code></a> may be useful, too
+                    (<a href="https://web-platform-tests.org/writing-tests/testharness-api.html">documentation</a>,
+                    <a href="https://darobin.github.com/test-harness-tutorial/docs/using-testharness.html">tutorial</a>)&nbsp;&mdash;&nbsp;but note that it still
+                    needs to be properly packaged and available through <code>npm</code>.</p>
+            </section>
+
+            <section id="tools">
+                <h2>Transpilers and module bundlers <a href="#tools">&#x1F517;</a></h2>
+                <p>We have used <a href="https://babeljs.io/">Babel</a> in a couple of projects (<code>npm</code>:
+                    <a href="https://www.npmjs.com/package/babelify"><code>babelify</code></a>), and recommend it when early-adopting new
+                    <abbr title="ECMAScript">ES</abbr> features.</p>
+                <p>We have used <a href="http://browserify.org/">Browserify</a> in at least one project
+                    (<code>npm</code>: <a href="https://www.npmjs.com/package/browserify"><code>browserify</code></a>) to pack server-side JS for usage on the
+                    browser.
+                    We have not evaluated <a href="https://webpack.github.io/">webpack</a> yet (but we should at some point).</p>
+            </section>
+
+            <section id="frontend">
+                <h2>Front-end frameworks <a href="#frontend">&#x1F517;</a></h2>
+                <p>Lately we have used mainly <a href="https://reactjs.org/">React</a>, and that is the one we would recommend in general.</p>
+                <p>For some small tools or pages we have also used <a href="https://angular.io/">Angular</a> (although way back when it was AngularJS) and we
+                    also liked it.
+                    And some of us have also experimented with (and liked) <a href="https://vuejs.org/">Vue.js</a>.</p>
+            </section>
+
+            <section id="docs">
+                <h2>Documentation <a href="#docs">&#x1F517;</a></h2>
+                <p>We use <a href="https://www.npmjs.com/package/jsdoc"><code>jsdoc</code></a> with the style
+                    <a href="https://www.npmjs.com/package/minami"><code>minami</code></a>.</p>
+                <p>See <a href="https://github.com/w3c/Eunomia/blob/master/package.json#L47">an example of usage</a> in Eunomia, and
+                    <a href="https://github.com/w3c/Eunomia/blob/master/jsdoc.json">the config file we use</a>.</p>
+            </section>
+
+            <section id="packages">
+                <h2>Other recommended packages <a href="#packages">&#x1F517;</a></h2>
+                <p>The following is a list of miscellaneous <code>npm</code> packages that are battle-tested and that we recommend (<strong>apart from the ones
+                    already mentioned in sections above</strong>).
+                    It's often the case that there are several <code>npm</code> packages to achieve the same goal, so it's convenient for us to converge on a
+                    more or less &ldquo;standard&rdquo; suite of packages.</p>
+                <ul>
+                    <li><a href="https://www.npmjs.com/package/express"><code>express</code></a>: generic framework (API/REST/web)
+                        [<span class="pending">PENDING</span>: document recommended routing]</li>
+                    <li><a href="https://www.npmjs.com/package/express-handlebars"><code>express-handlebars</code></a>:
+                        <a href="http://handlebarsjs.com/">Handlebars</a> middleware for Express (recommended to use templates and reuse fragments of
+                        markup)</li>
+                    <li><a href="https://www.npmjs.com/package/body-parser"><code>body-parser</code></a>: body parsing middleware</li>
+                    <li><a href="https://www.npmjs.com/package/cookie-session"><code>cookie-session</code></a>: cookie management middleware</li>
+                    <li><a href="https://www.npmjs.com/package/moment"><code>moment</code></a> and
+                          <a href="https://www.npmjs.com/package/moment-timezone"><code>moment-timezone</code></a>: to handle dates and times</li>
+                    <li><a href="https://www.npmjs.com/package/winston"><code>winston</code></a>: for logging
+                        [<span class="pending">PENDING</span>: document recommended format for logs]</li>
+                    <li><a href="https://www.npmjs.com/package/octokat"><code>octokat</code></a>: to use the GH API&nbsp;&mdash;&nbsp;although at the time of
+                        writing <a href="https://github.com/philschatz/octokat.js/issues/265">it does <em>not</em> support</a> the GH API
+                        <a href="https://developer.github.com/v4/">v4 (GraphQL)</a>, but only <a href="https://developer.github.com/v3/">v3</a>; we may need an
+                        alternative at some point</li>
+                    <li><a href="https://www.npmjs.com/package/socket.io"><code>socket.io</code></a>: when web sockets are necessary</li>
+                    <li><a href="https://www.npmjs.com/package/compression"><code>compression</code></a>: compression middleware</li>
+                    <li><a href="https://www.npmjs.com/package/request"><code>request</code></a> (simpler) or
+                        <a href="https://www.npmjs.com/package/superagent"><code>superagent</code></a> (more powerful) as HTTP clients</li>
+                    <li><a href="https://www.npmjs.com/package/jsdom"><code>jsdom</code></a> to manipulate the
+                      DOM <em>&agrave; la</em> jQuery&nbsp;&mdash;&nbsp;older alternatives (may be acceptable depending on needs):
+                      <a href="https://www.npmjs.com/package/whacko"><code>whacko</code></a> (uses <code>parse5</code>),
+                      <a href="https://www.npmjs.com/package/cheerio"><code>cheerio</code></a> (better maintained than <code>whacko</code>)</li>
+                    <li><a href="https://www.npmjs.com/package/nodemailer"><code>nodemailer</code></a>
+                        (and <a href="https://www.npmjs.com/package/nodemailer-sendmail-transport"><code>nodemailer-sendmail-transport</code></a>)
+                        to send e-mail</li>
+                    <li><a href="https://www.npmjs.com/package/nock"><code>nock</code></a> for mocks</li>
+                    <li><a href="https://www.npmjs.com/package/passport"><code>passport</code></a> to do OAuth
+                        (and <a href="https://www.npmjs.com/package/passport-github2"><code>passport-github2</code></a> to authenticate against GitHub
+                        in particular)</li>
+                </ul>
+                <p>Also, make sure you check out
+                    <a href="https://www.npmjs.com/~w3c"><em>our own</em> (W3C's) <code>npm</code> packages on <code>npmjs.com</code></a>.</p>
+            </section>
+
+            <section id="also">
+                <h2>Additional notes and links <a href="#also">&#x1F517;</a></h2>
+                <ul>
+                    <li>Universal (or isomorphic) JavaScript is a nice idea.
+                        We don't encourage it actively, but there is nothing wrong in benefitting from a common codebase, when that is reasonable.
+                        In that regard:
+                        <ul>
+                            <li>Using <a href="https://www.npmjs.com/package/node-fetch"><code>node-fetch</code></a> in Node.js is a step towards a universal
+                                codebase</li>
+                            <li>Ditto about using
+                                <a href="https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original"><code>util.promisify()</code></a>
+                                to transform Node.js callback functions into promises</li>
+                        </ul>
+                    </li>
+                    <li>Internally, we use <a href="http://pm2.keymetrics.io/">PM2</a> to {handle, monitor, respawn} Node.js processes</li>
+                    <li>A <em>public</em> wiki page about JS and Node.js:
+                        <a href="https://www.w3.org/wiki/Resources_about_JavaScript_and_Node.js">&ldquo;resources about JavaScript and Node.js&rdquo;</a></li>
+                    <li>For public projects hosted on GitHub:
+                        <a href="https://w3c.github.io/best-practices.html">&ldquo;GH best practices and recommended tools&rdquo;</a></li>
+                    <li>For sharing (<em>publicly</em>) <abbr title="proof of concept">PoC</abbr>'s, ideas or experiments,
+                        <a href="https://runkit.com/home">RunKit</a> is a good tool</li>
+                </ul>
+            </section>
+
+        </main>
+
+        <footer>
+            <address>
+                <a rel=author href="https://www.w3.org/People/Antonio/">Antonio Olmo Titos</a> <br />
+                Created 2018-08-09 <br />
+                Last modified 2018-09-17
+            </address>
+        </footer>
+
+    </body>
+
+</html>

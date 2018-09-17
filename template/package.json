@@ -1,0 +1,21 @@
+{
+    "name": "w3c-nodejs-template",
+    "version": "1.0.0",
+    "description": "W3C's Node.js template project",
+    "main": "server.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/w3c/nodejs.git"
+    },
+    "keywords": [
+        "w3c",
+        "nodejs",
+        "template"
+    ],
+    "author": "World Wide Web Consortium",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/w3c/nodejs/issues"
+    },
+    "homepage": "https://github.com/w3c/nodejs"
+}
