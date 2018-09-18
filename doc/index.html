@@ -69,7 +69,7 @@
                 margin-left: 1rem;
                 text-decoration: none;
                 font-weight: 300;
-                transition: .25s opacity linear;
+                transition: .2s opacity ease-out;
             }
 
             section:hover h2 a,
@@ -91,10 +91,6 @@
                     background-color: #ffffff;
                 }
                 to {}
-            }
-            .pending {
-                background-color: #ffe0e0;
-                padding: 0 .25em;
             }
             a[href^='https://www.npmjs.com/package/']::before {
                 content: "📦 ";
@@ -240,8 +236,7 @@
                     It's often the case that there are several <code>npm</code> packages to achieve the same goal, so it's convenient for us to converge on a
                     more or less &ldquo;standard&rdquo; suite of packages.</p>
                 <ul>
-                    <li><a href="https://www.npmjs.com/package/express"><code>express</code></a>: generic framework (API/REST/web)
-                        [<span class="pending">PENDING</span>: document recommended routing]</li>
+                    <li><a href="https://www.npmjs.com/package/express"><code>express</code></a>: generic framework (API/REST/web)</li>
                     <li><a href="https://www.npmjs.com/package/express-handlebars"><code>express-handlebars</code></a>:
                         <a href="http://handlebarsjs.com/">Handlebars</a> middleware for Express (recommended to use templates and reuse fragments of
                         markup)</li>
@@ -249,8 +244,7 @@
                     <li><a href="https://www.npmjs.com/package/cookie-session"><code>cookie-session</code></a>: cookie management middleware</li>
                     <li><a href="https://www.npmjs.com/package/moment"><code>moment</code></a> and
                           <a href="https://www.npmjs.com/package/moment-timezone"><code>moment-timezone</code></a>: to handle dates and times</li>
-                    <li><a href="https://www.npmjs.com/package/winston"><code>winston</code></a>: for logging
-                        [<span class="pending">PENDING</span>: document recommended format for logs]</li>
+                    <li><a href="https://www.npmjs.com/package/winston"><code>winston</code></a>: for logging</li>
                     <li><a href="https://www.npmjs.com/package/octokat"><code>octokat</code></a>: to use the GH API&nbsp;&mdash;&nbsp;although at the time of
                         writing <a href="https://github.com/philschatz/octokat.js/issues/265">it does <em>not</em> support</a> the GH API
                         <a href="https://developer.github.com/v4/">v4 (GraphQL)</a>, but only <a href="https://developer.github.com/v3/">v3</a>; we may need an
@@ -305,7 +299,7 @@
             <address>
                 <a rel=author href="https://www.w3.org/People/Antonio/">Antonio Olmo Titos</a> <br />
                 Created 2018-08-09 <br />
-                Last modified 2018-09-17
+                Last modified 2018-09-18
             </address>
         </footer>
 

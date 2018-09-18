@@ -8,7 +8,7 @@
 
 **Contents:**
 
-* [Documentation](https://w3c.github.io/nodejs/doc/)
+* [Best practices and recommended tools](https://w3c.github.io/nodejs/doc/)
 * [Template project](https://github.com/w3c/nodejs/tree/master/template/)
 
 Copyright &copy; 2018 [World Wide Web Consortium](https://www.w3.org/)
