@@ -22,7 +22,7 @@
             body {
                 box-sizing: border-box;
                 margin: 0 auto;
-                padding: 1rem;
+                padding: .5rem 1rem;
                 width: 100%;
                 max-width: 60rem;
             }
@@ -49,6 +49,7 @@
             }
             header,
             footer {
+                padding: .5rem;
                 border-style: solid;
                 border-color: #f0f0f0;
             }
@@ -72,6 +73,10 @@
                 transition: .2s opacity ease-out;
             }
 
+            main section {
+                padding: .5rem;
+            }
+
             section:hover h2 a,
             section:hover h3 a,
             section:hover h4 a,
@@ -82,13 +87,14 @@
 
             :target {
                 animation-duration: 2s;
+                animation-timing-function: ease-out;
                 animation-name: highlight;
             }
 
             @keyframes highlight {
                 0%, 50% {
-                    box-shadow: 0 0 4rem #000000;
-                    background-color: #ffffff;
+                    box-shadow: 0 0 4rem #808080;
+                    background-color: #ffff80;
                 }
                 to {}
             }
