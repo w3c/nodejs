@@ -1,6 +1,6 @@
 # W3C &#8725; Node.js
 
-*Node.js best practices, recommended tools and template projects*
+*Node.js best practices and recommended tools*
 
 [![W3C logo](https://w3c.github.io/nodejs/doc/img/w3c-logo.png "Go to W3C's web site")](https://www.w3.org/)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -9,7 +9,6 @@
 **Contents:**
 
 * [Best practices and recommended tools](https://w3c.github.io/nodejs/doc/)
-* [Template project](https://github.com/w3c/nodejs/tree/master/template/)
 
 Copyright &copy; 2018 [World Wide Web Consortium](https://www.w3.org/)
 
