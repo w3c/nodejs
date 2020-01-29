@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>W3C &#8725; Node.js versions on W3C servers</title>
+    <link rel="stylesheet" href="https://w3c.github.io/css/wgio.css">
+    <style>
+    figure {
+        margin: auto;
+    }
+    figure > img {
+        max-width: 800px;
+    }
+    figcaption {
+        background-color: #222;
+        color: #fff;
+        font: italic smaller sans-serif;
+        padding: 3px;
+        text-align: center;
+    } 
+    </style>
+    <header>
+        <h1>Node.js versions on W3C servers</h1>
+    </header>
+    <nav>
+        <a href=".">Best practices and recommended tools</a>
+    </nav>
+    <main>
+        <p>The purpose of this page is to describe which Node.js version you can expect on the W3C servers.</p>
+        <h2>Node.js roadmap</h2>
+        <p>
+        According to the <a href="https://nodejs.org/en/about/releases/">current Node.js roadmap</a> (see below), new major and stable (even-numbered) versions will be released every year in April.</p>
+        <figure>
+            <img src="https://raw.githubusercontent.com/nodejs/Release/master/schedule.svg?sanitize=true" alt="Node.js release" />
+            <figcaption>Current Node.js roadmap</figcaption>
+        </figure>
+        <h2>What you can expect at W3C</h2>
+        <ul>
+            <li>W3C will install the latest even-numbered version shortly after it moves to <em>Active LTS</em>
+            <li>In order to prepare your code, we will send an announcement to group-node-users@w3.org (<a href="https://lists.w3.org/Archives/Group/group-node-users/">archives</a> restricted to the members of the group) six months before (when the version becomes <em>Current</em>).
+            <li>If you are doing continuous integration, we encourage you to configure it to run the test with the LTS version(s) of Node.js.<br>
+              In travis:
+              <pre>language: node_js
+node_js:
+  - lts/*</pre>
+            <li>In production, our tools will run the latest Active LTS.
+        </ul>
+    </main>
+</html>
