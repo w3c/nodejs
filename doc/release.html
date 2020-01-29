@@ -36,14 +36,15 @@
         </figure>
         <h2>What you can expect at W3C</h2>
         <ul>
-            <li>W3C will install the latest even-numbered version shortly after it moves to <em>Active LTS</em>
+            <li>W3C will install the latest even-numbered version shortly after it moves to <em>Active LTS</em>.
             <li>In order to prepare your code, we will send an announcement to group-node-users@w3.org (<a href="https://lists.w3.org/Archives/Group/group-node-users/">archives</a> restricted to the members of the group) six months before (when the version becomes <em>Current</em>).
-            <li>If you are doing continuous integration, we encourage you to configure it to run the test with the LTS version(s) of Node.js.<br>
-              In travis:
+            <li>If you are doing continuous integration, we encourage you to configure it to run the tests with the latest stable and LTS Node.js releases.<br>
+              With Travis CI, use the following to <a href="https://docs.travis-ci.com/user/languages/javascript-with-nodejs/#specifying-nodejs-versions">specify Node.js versions</a>:
               <pre>language: node_js
 node_js:
+  - node
   - lts/*</pre>
-            <li>In production, our tools will run the latest Active LTS.
+            <li><strong>In production</strong>, our tools will run the <strong>latest Active LTS release</strong>.
         </ul>
     </main>
 </html>
