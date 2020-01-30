@@ -140,7 +140,7 @@
             <section id="npm">
                 <h2>Package manager <a href="#npm">&#x1F517;</a></h2>
                 <p>We use <a href="https://www.npmjs.com/">npm</a>.
-                    Some of us have evaluated <a href="https://yarnpkg.com/lang/en/">Yarn</a>, but we are not convinced it's a better alternative at the
+                    Some of us have evaluated <a href="https://yarnpkg.com/">Yarn</a>, but we are not convinced it's a better alternative at the
                     moment.</p>
             </section>
 
@@ -153,16 +153,12 @@
 
             <section id="security">
                 <h2>Security <a href="#security">&#x1F517;</a></h2>
-                <p>We use <code>npm audit</code> to watch vulnerabilities in packages.
-				    <strong>Caveat:</strong> it requires <code>npm&gt;=6</code>, and Node.js <code>8</code> uses <code>npm@5</code> by default.
-				    </p>
+                <p>We use <code>npm audit</code> to watch vulnerabilities in packages.</p>
                 <p>See eg <a href="https://github.com/w3c/echidna/blob/master/package.json#L80">how we use it in Echidna</a>.
                     We have devised a mechanism to keep track of known vulnerabilities (exceptions); see the file
                     <a href="https://github.com/w3c/echidna/blob/master/known-vulns.txt"><code>known-vulns.txt</code></a>.</p>
                 <p>Until <code>npm audit</code> is capable of alerting of outdated packages too, sometimes we use
                     <a href="https://www.npmjs.com/package/npm-check"><code>npm-check</code></a> in our scripts to check if there are outdated versions of packages.</p>
-                <p>We are phasing out <a href="https://www.npmjs.com/package/nsp"><code>nsp</code></a> for this
-				    (except possibly when we are forced to use Node.js <code>&lt;=8</code>; see caveat above).</p>
             </section>
 
             <section id="lint">
@@ -245,7 +241,7 @@
                 <ul>
                     <li><a href="https://www.npmjs.com/package/express"><code>express</code></a>: generic framework (API/REST/web)</li>
                     <li><a href="https://www.npmjs.com/package/express-handlebars"><code>express-handlebars</code></a>:
-                        <a href="http://handlebarsjs.com/">Handlebars</a> middleware for Express (recommended to use templates and reuse fragments of
+                        <a href="https://handlebarsjs.com/">Handlebars</a> middleware for Express (recommended to use templates and reuse fragments of
                         markup)</li>
                     <li><a href="https://www.npmjs.com/package/body-parser"><code>body-parser</code></a>: body parsing middleware</li>
                     <li><a href="https://www.npmjs.com/package/cookie-session"><code>cookie-session</code></a>: cookie management middleware</li>
@@ -287,11 +283,11 @@
                             <li>Using <a href="https://www.npmjs.com/package/node-fetch"><code>node-fetch</code></a> in Node.js is a step towards a universal
                                 codebase</li>
                             <li>Ditto about using
-                                <a href="https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original"><code>util.promisify()</code></a>
+                                <a href="https://nodejs.org/dist/latest/docs/api/util.html#util_util_promisify_original"><code>util.promisify()</code></a>
                                 to transform Node.js callback functions into promises</li>
                         </ul>
                     </li>
-                    <li>Internally, we use <a href="http://pm2.keymetrics.io/">PM2</a> to {handle, monitor, respawn} Node.js processes</li>
+                    <li>Internally, we use <a href="https://pm2.keymetrics.io/">PM2</a> to {handle, monitor, respawn} Node.js processes</li>
                     <li>A <em>public</em> wiki page about JS and Node.js:
                         <a href="https://www.w3.org/wiki/Resources_about_JavaScript_and_Node.js">&ldquo;resources about JavaScript and Node.js&rdquo;</a></li>
                     <li>For public projects hosted on GitHub:
