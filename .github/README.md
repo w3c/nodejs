@@ -9,7 +9,8 @@
 **Contents:**
 
 * [Best practices and recommended tools](https://w3c.github.io/nodejs/doc/)
+* [Node.js versions at W3C](https://w3c.github.io/nodejs/doc/release.html)
 
-Copyright &copy; 2018 [World Wide Web Consortium](https://www.w3.org/)
+Copyright &copy; 2020 [World Wide Web Consortium](https://www.w3.org/)
 
 Licenced [under the terms of the MIT Licence](LICENSE.md)
