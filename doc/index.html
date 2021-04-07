@@ -114,7 +114,7 @@
                     <li><a href="#npm">Package manager</a></li>
                     <li><a href="#conventions">Code conventions</a></li>
                     <li><a href="#security">Security</a></li>
-                    <li><a href="#lint">Linting and hinting</a></li>
+                    <li><a href="#lint">Linting</a></li>
                     <li><a href="#coverage">Code coverage</a></li>
                     <li><a href="#dep-mgmt">Dependency management</a></li>
                     <li><a href="#testing">Testing</a></li>
@@ -162,15 +162,10 @@
             </section>
 
             <section id="lint">
-                <h2>Linting and hinting <a href="#lint">&#x1F517;</a></h2>
-                <p>We <em>lint</em> our code using <a href="https://www.npmjs.com/package/eslint"><code>eslint</code></a>: see
-                    <a href="https://github.com/w3c/echidna/blob/master/package.json#L81">an example of
-                    usage in Echidna</a>, and <a href="https://github.com/w3c/echidna/blob/master/.eslintrc.json">the config file we maintain</a>.</p>
-                <p>The package <a href="https://www.npmjs.com/package/eslint-plugin-node"><code>eslint-plugin-node</code></a> is also used, to provide a
-                    baseline of common rules (which we modify slightly via config).</p>
-                <p>We <em>hint</em> our code using <a href="https://www.npmjs.com/package/jshint"><code>jshint</code></a>: see
-                  <a href="https://github.com/w3c/Eunomia/blob/master/package.json#L45">an example of
-                    usage in Eunomia</a>, and <a href="https://github.com/w3c/Eunomia/blob/master/.jshintrc">the config file we maintain</a>.</p>
+                <h2>Linting<a href="#lint">&#x1F517;</a></h2>
+                <p>We <em>lint</em> our code using <a href="https://www.npmjs.com/package/eslint"><code>eslint</code></a> with <a href="https://www.npmjs.com/package/eslint-config-airbnb-base">eslint-config-airbnb-base</a> code style, see <a href="https://github.com/w3c/spec-generator/blob/864ecd2542eb59ff7cab4299e1e813153dfd4ac0/package.json#L33">an example of usage</a> in spec-generator, and the <a href="https://github.com/w3c/spec-generator/blob/main/.eslintrc.json">eslint config file</a> we maintain.</p>
+                <p>The package <a href="https://www.npmjs.com/package/eslint-plugin-node"><code>eslint-plugin-node</code></a> is also used, to provide a baseline of common rules (which we modify slightly via config).</p>
+                <p>We use <a href="https://www.npmjs.com/package/prettier">prettier</a> as code formatter, see <a href="https://github.com/w3c/spec-generator/blob/main/.prettierrc">sample config file for spec-generator</a>.</p>
             </section>
 
             <section id="coverage">
